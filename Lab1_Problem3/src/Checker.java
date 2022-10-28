@@ -69,7 +69,7 @@ public class Checker {
             }
         }
 
-        //System.out.println(node.getValue()+" "+isValid.get());
+        //System.out.println(node.getValue() + " " + isValid.get());
         return isValid.get();
     }
 }

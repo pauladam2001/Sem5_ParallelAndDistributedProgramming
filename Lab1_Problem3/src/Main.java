@@ -48,13 +48,13 @@ public class Main {
 
     private static void modifyInputNodes() {
         final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        final ScheduledFuture<?> promise = executor.scheduleAtFixedRate(new ModifyPrimaryValuesTask(), 0, 1, TimeUnit.SECONDS);
-        final ScheduledFuture<Boolean> canceller = executor.schedule(() -> promise.cancel(false), 30, TimeUnit.SECONDS);
+        final ScheduledFuture<?> promise = executor.scheduleAtFixedRate(new ModifyPrimaryValuesTask(), 0, 100, TimeUnit.MILLISECONDS);
+        final ScheduledFuture<Boolean> canceller = executor.schedule(() -> promise.cancel(false), 10, TimeUnit.SECONDS);
     }
 
     private static void runChecker() {
         final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         final ScheduledFuture<?> promise = executor.scheduleAtFixedRate(new ConsistencyCheckTask(), 5, 5, TimeUnit.SECONDS);
-        final ScheduledFuture<Boolean> canceller = executor.schedule(() -> promise.cancel(false), 35, TimeUnit.SECONDS);
+        final ScheduledFuture<Boolean> canceller = executor.schedule(() -> promise.cancel(false), 15, TimeUnit.SECONDS);
     }
 }

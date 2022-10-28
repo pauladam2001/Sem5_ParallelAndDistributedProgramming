@@ -29,7 +29,7 @@ public class Value {
         this.primary.add(input);
     }
 
-    public void addValue(int value){
+    public void addValue(int value) {
         lock.lock();
 
         this.value += value;
@@ -40,7 +40,7 @@ public class Value {
         lock.unlock();
     }
 
-    public void addSecondary(Value secondary){
+    public void addSecondary(Value secondary) {
         this.secondary.add(secondary);
         secondary.addPrimary(this);
         secondary.addValue(value);
