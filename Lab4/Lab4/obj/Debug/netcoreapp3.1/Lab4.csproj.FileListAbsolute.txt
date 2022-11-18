@@ -1,0 +1,13 @@
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.exe
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.deps.json
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.runtimeconfig.json
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.runtimeconfig.dev.json
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.dll
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\bin\Debug\netcoreapp3.1\Lab4.pdb
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.csprojAssemblyReference.cache
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.AssemblyInfoInputs.cache
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.AssemblyInfo.cs
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.csproj.CoreCompileInputs.cache
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.dll
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.pdb
+E:\AAFacultate\Anul 3 Semestrul 1\Programare Paralela si Distribuita\Lab\Lab4\Lab4\obj\Debug\netcoreapp3.1\Lab4.genruntimeconfig.cache
