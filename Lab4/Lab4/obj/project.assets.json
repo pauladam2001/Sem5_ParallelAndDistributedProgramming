@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Programare Paralela si Distribuita\\Lab\\Lab4\\Lab4\\Lab4.csproj",
+      "projectUniqueName": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Parallel and Distributed Programming\\Labs\\Lab4\\Lab4\\Lab4.csproj",
       "projectName": "Lab4",
-      "projectPath": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Programare Paralela si Distribuita\\Lab\\Lab4\\Lab4\\Lab4.csproj",
+      "projectPath": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Parallel and Distributed Programming\\Labs\\Lab4\\Lab4\\Lab4.csproj",
       "packagesPath": "C:\\Users\\paula\\.nuget\\packages\\",
-      "outputPath": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Programare Paralela si Distribuita\\Lab\\Lab4\\Lab4\\obj\\",
+      "outputPath": "E:\\AAFacultate\\Anul 3 Semestrul 1\\Parallel and Distributed Programming\\Labs\\Lab4\\Lab4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
