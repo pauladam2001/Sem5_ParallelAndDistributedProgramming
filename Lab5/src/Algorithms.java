@@ -46,6 +46,8 @@ public class Algorithms {
             return ClassicSequential(first, second);
         }
 
+        // the point of the Karatsuba algorithm is to break large numbers down into smaller numbers so that any multiplications that occur happen on smaller numbers
+
         // calculate the middle of the polynomials
         int length = Math.max(first.degree, second.degree) / 2;
 
@@ -75,6 +77,8 @@ public class Algorithms {
         if (first.degree < 2 || second.degree < 2) {
             return KaratsubaSequential(first, second);
         }
+
+        // the point of the Karatsuba algorithm is to break large numbers down into smaller numbers so that any multiplications that occur happen on smaller numbers
 
         // calculate the middle of the polynomials
         int length = Math.max(first.degree, second.degree) / 2;

@@ -11,7 +11,7 @@ namespace Lab4
         {
             // hostname = www.cs.ubbcluj.ro
             // endpoint = /~rlupsa/edu/pdp/progs/futures-demo2-cascade1.cs
-            return "GET " + endPoint + " HTTP/1.1\r\n" + "Host: " + hostName + "\r\n" + "Content-Length: 0\r\n\r\n";    // HTTP 1.1 is the latest version of HTTP
+            return "GET " + endPoint + " HTTP/1.1\r\n" + "Host: " + hostName + "\r\n" + "Content-Length: 0\r\n\r\n" + "Content-Type: text/html";    // HTTP 1.1 is the latest version of HTTP
         }
 
         public static int GetContentLength(string response)
@@ -38,6 +38,13 @@ namespace Lab4
         public static bool ResponseHeaderObtained(string response)
         {
             return response.Contains("\r\n\r\n");
+        }
+
+        public static string GetResponseBody(string responseContent)
+        {
+            var responseParts = responseContent.Split(new[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            return responseParts.Length > 1 ? responseParts[1] : "";
         }
     }
 }

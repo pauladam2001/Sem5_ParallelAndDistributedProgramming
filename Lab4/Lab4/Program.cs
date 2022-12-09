@@ -7,8 +7,8 @@ namespace Lab4
     {
         static void Main(string[] args)
         {
-            //var hosts = new[] { "www.cs.ubbcluj.ro/~rlupsa/edu/pdp/progs/futures-demo2-cascade1.cs", "www.cs.ubbcluj.ro/~motogna/LFTC" }.ToList();
-            var hosts = new[] { "www.cs.ubbcluj.ro/~rlupsa/edu/pdp/progs/futures-demo2-cascade1.cs" }.ToList();
+            var hosts = new[] { "www.cs.ubbcluj.ro/~hfpop/teaching/pfl/requirements.html" }.ToList();
+            //var hosts = new[] { "www.cs.ubbcluj.ro/~motogna/LFTC", "www.cs.ubbcluj.ro/~hfpop/teaching/pfl/requirements.html" }.ToList();
 
             CallbackImplementation.Run(hosts);
             //TaskImplementation.Run(hosts);

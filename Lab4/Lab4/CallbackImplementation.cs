@@ -11,17 +11,25 @@ namespace Lab4
     public class CallbackImplementation
     {
         public static int Port { get; set; } = 80;  // HTTP port, the default network port used to send and receive unencrypted web pages
+        private static int remainingThreads;
+        static object RemainingThreadsLock = new object();
 
         public static void Run(List<string> hostNames)
         {
             var id = 1;
-
+            remainingThreads = hostNames.Count;
             hostNames.ForEach(hostName =>
             {
                 StartClient(hostName, id);
-                Thread.Sleep(1000);
                 id += 1;
             });
+            lock (RemainingThreadsLock)
+            {
+                while (remainingThreads > 0)
+                {
+                    Monitor.Wait(RemainingThreadsLock);     // releases the lock on an object and blocks the current thread until it reacquires the lock
+                }
+            }
         }
 
         private static IPEndPoint CreateEndPoint(IPAddress ipAddress) => new IPEndPoint(ipAddress, Port);
@@ -109,7 +117,7 @@ namespace Lab4
             // param4 - flags
             // param5 - an AsyncCallback (references a method to be called when a corresponding asynchronous operation completes)
             // param6 - a user-defined object that contains information about the receive operation. This object is passed to the EndReceive(IAsyncResult) delegate when the operation is complete
-            resultSocket.Socket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, Receiving, resultSocket);
+            clientSocket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, Receiving, resultSocket);
         }
 
         private static void Receiving(IAsyncResult result)      // IAsyncResult - represents the status of an asynchronous operation
@@ -127,26 +135,44 @@ namespace Lab4
                 var bytesRead = clientSocket.EndReceive(result);
 
                 // get a number of chars <= buffer size and store it in Reponse
-                resultSocket.Response += Encoding.ASCII.GetString(resultSocket.Buffer, 0, bytesRead);
-                
+                resultSocket.Response.Append(Encoding.ASCII.GetString(resultSocket.Buffer, 0, bytesRead));
+                // Console.WriteLine(Encoding.ASCII.GetString(resultSocket.Buffer, 0, bytesRead));
+
                 // if the response header is not fully obtained we read the next data
-                if (!HTTPProtocolParser.ResponseHeaderObtained(resultSocket.Response))
+                if (!HTTPProtocolParser.ResponseHeaderObtained(resultSocket.Response.ToString()))
                 {
                     clientSocket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, Receiving, resultSocket);
                 } 
                 else   // the response header is fully obtained
                 {
-                    // print the length of the received data
-                    var contentLength = HTTPProtocolParser.GetContentLength(resultSocket.Response);
-                    Console.WriteLine($"Content length is: {contentLength}");
-                    
-                    // print the received data
-                    var output = Encoding.Default.GetString(resultSocket.Buffer);
-                    Console.WriteLine(output);
+                    var responseBody = HTTPProtocolParser.GetResponseBody(resultSocket.Response.ToString());
 
-                    // release and close the socket
-                    clientSocket.Shutdown(SocketShutdown.Both);     // disables sends and receives on clientSocket
-                    clientSocket.Close();                           // closes clientSocket connection and releases all resources
+                    // print the content length and the length of the received data
+                    var contentLength = HTTPProtocolParser.GetContentLength(resultSocket.Response.ToString());
+                    Console.WriteLine($"Content length is: {contentLength}");
+                    Console.WriteLine($"Response length is: {responseBody.Length}");
+                    Console.WriteLine();
+
+                    // if we still haven't received the full response
+                    if (responseBody.Length < contentLength)
+                    {
+                        clientSocket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, Receiving, resultSocket);
+                    }
+                    else    // we received the full response
+                    {
+                        // print the received data
+                        Console.WriteLine(resultSocket.Response);
+
+                        // release and close the socket
+                        clientSocket.Shutdown(SocketShutdown.Both);     // disables sends and receives on clientSocket
+                        clientSocket.Close();                           // closes clientSocket connection and releases all resources
+
+                        lock (RemainingThreadsLock)
+                        {
+                            remainingThreads--;
+                            Monitor.Pulse(RemainingThreadsLock);    // notifies a thread in the waiting queue of a change in the locked object's state
+                        }
+                    }
                 }
             }
             catch (Exception e)

@@ -190,22 +190,38 @@ namespace Lab4
                 var bytesRead = clientSocket.EndReceive(result);
 
                 // get a number of chars <= buffer size and store it in Reponse
-                resultSocket.Response += Encoding.ASCII.GetString(resultSocket.Buffer, 0, bytesRead);
+                resultSocket.Response.Append(Encoding.ASCII.GetString(resultSocket.Buffer, 0, bytesRead));
+                // Console.WriteLine(resultSocket.Response);
 
                 // if the response header is not fully obtained we read the next data
-                if (!HTTPProtocolParser.ResponseHeaderObtained(resultSocket.Response))
+                if (!HTTPProtocolParser.ResponseHeaderObtained(resultSocket.Response.ToString()))
                 {
                     clientSocket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, ReceiveCallback, resultSocket);
                 }
                 else   // the response header is fully obtained
                 {
-                    // print the received data
-                    string output = Encoding.Default.GetString(resultSocket.Buffer);
-                    Console.WriteLine(output);
+                    var responseBody = HTTPProtocolParser.GetResponseBody(resultSocket.Response.ToString());
 
-                    // signal that all bytes have been received
-                    // ManualResetEvent.Set - sending the signal to all waiting threads
-                    resultSocket.ReceiveDone.Set();    
+                    // print the content length and the length of the received data
+                    var contentLength = HTTPProtocolParser.GetContentLength(resultSocket.Response.ToString());
+                    Console.WriteLine($"Content length is: {contentLength}");
+                    Console.WriteLine($"Response length is: {responseBody.Length}");
+                    Console.WriteLine();
+
+                    // if we still haven't received the full response
+                    if (responseBody.Length < contentLength)
+                    {
+                        clientSocket.BeginReceive(resultSocket.Buffer, 0, Connection.BufferSize, 0, ReceiveCallback, resultSocket);
+                    }
+                    else    // we received the full response
+                    {
+                        // print the received data
+                        Console.WriteLine(resultSocket.Response);
+
+                        // signal that all bytes have been received
+                        // ManualResetEvent.Set - sending the signal to all waiting threads
+                        resultSocket.ReceiveDone.Set();
+                    }   
                 }
             }
             catch (Exception e)

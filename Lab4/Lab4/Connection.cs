@@ -18,8 +18,9 @@ namespace Lab4
         public ManualResetEvent SendDone { get; set; } = new ManualResetEvent(false);       // ManualResetEvent - represents a thread synchronization event that, when signaled, must be reset manually
         public ManualResetEvent ReceiveDone { get; set; } = new ManualResetEvent(false);    // ManualResetEvent - represents a thread synchronization event that, when signaled, must be reset manually
         public Socket Socket { get; set; }                                                  // ManualResetEvent is used for sending signals between 2 or more threads
-        public static int BufferSize { get; set; } = 1024 * 10;
+        public static int BufferSize { get; set; } = 16;
         public byte[] Buffer { get; set; } = new byte[BufferSize];
-        public string Response { get; set; }
+
+        public StringBuilder Response = new StringBuilder();
     }
 }
