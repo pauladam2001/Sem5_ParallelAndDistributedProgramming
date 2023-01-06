@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main {
+
+    // a Hamiltonian cycle is a graph cycle through a graph that visits each node exactly once
     public static void main(String[] args) throws Exception {
         // Hamiltonian Cycle: 0 -> 1 -> 2 -> 4 -> 3 -> 0
         Graph graphWithHamiltonianCycle = new Graph(

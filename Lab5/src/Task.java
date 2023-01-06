@@ -20,7 +20,7 @@ public class Task implements Runnable {
                 return;
             }
             for (int j = 0; j <= i; j++) {
-                if (j < first.coefficients.size() && (i - j) < second.coefficients.size()) {
+                if (j < first.coefficients.size() && (i - j) < second.coefficients.size()) {    // i - j in order to get all positions (0, 1, 2 etc.)
                     int value = first.coefficients.get(j) * second.coefficients.get(i - j);
                     result.coefficients.set(i, result.coefficients.get(i) + value);
                 }

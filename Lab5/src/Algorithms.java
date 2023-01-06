@@ -27,15 +27,20 @@ public class Algorithms {
         }
 
         Polynomial resultPolynomial = new Polynomial(coefficients);
+
+        // an ExecutorService that executes each submitted task using one of possibly several pooled threads, normally configured using Executors factory methods
+        // newFixedThreadPool - creates a thread pool that reuses a fixed number of threads operating off a shared unbounded queue. At any point, at most nThreads threads will be active processing tasks. If additional tasks are submitted when all threads are active, they will wait in the queue until a thread is available
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
-        int step = (first.degree + second.degree + 1) / 4;                      // distribute nr of computations between threads
+        int step = (first.degree + second.degree + 1) / 2;                      // distribute nr of computations between threads
         for (int i = 0; i <= first.degree + second.degree; i = i + step) {
             Task task = new Task(i, i + step, first, second, resultPolynomial);
-            threadPoolExecutor.execute(task);
+            threadPoolExecutor.execute(task);   // executes the given task sometime in the future
         }
 
+        // initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted
         threadPoolExecutor.shutdown();
+        // blocks until all tasks have completed execution after a shutdown request
         threadPoolExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
 
         return resultPolynomial;

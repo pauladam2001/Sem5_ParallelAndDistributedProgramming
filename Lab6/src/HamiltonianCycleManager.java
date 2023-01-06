@@ -25,7 +25,7 @@ public class HamiltonianCycleManager {
             return;
         }
 
-        // if we visited all nodes and the above condition is not met, then there is not Hamiltonian Cycle
+        // if we visited all nodes and the above condition is not met, then there is no Hamiltonian Cycle
         if (path.size() == graph.size()) {
             return;
         }
@@ -40,11 +40,12 @@ public class HamiltonianCycleManager {
                 // call findHamiltonianCycle for this node recursively in a new thread
                 ExecutorService executorService = Executors.newFixedThreadPool(4);  // an object that executes submitted Runnable tasks and provides methods to manage termination and methods that can produce a Future for tracking progress of one or more asynchronous tasks
                 final int node = i;     // error otherwise, it needs to be final in lambda expression
+                ArrayList<Integer> copiedPath = new ArrayList<>(path);
 
                 // the Runnable interface should be implemented by any class whose instances are intended to be executed by a thread. The class must define a method of no arguments called run.
                 final Runnable task = () -> {   // https://www.tutorialspoint.com/how-to-implement-the-runnable-interface-using-lambda-expression-in-java
                     try {
-                        findHamiltonianCycle(node, path);
+                        findHamiltonianCycle(node, copiedPath);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
