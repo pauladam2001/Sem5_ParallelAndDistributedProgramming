@@ -1,9 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
-public class Matrix {
+public class Matrix implements Serializable {
     private static final byte[] moveVertically = new byte[]{0, -1, 0, 1};
     private static final byte[] moveHorizontally = new byte[]{-1, 0, 1, 0};
     private static final String[] MOVES = new String[]{"left", "up", "right", "down"};
@@ -29,7 +30,7 @@ public class Matrix {
     public static Matrix readFromFile() throws IOException {
         byte[][] values = new byte[4][4];
         int freeI = -1, freeJ = -1;
-        Scanner scanner = new Scanner(new BufferedReader(new FileReader("E:\\AAFacultate\\Anul 3 Semestrul 1\\Parallel and Distributed Programming\\Labs\\Project_15PuzzleProblem\\Threads\\src\\input.in")));
+        Scanner scanner = new Scanner(new BufferedReader(new FileReader("E:\\AAFacultate\\Anul 3 Semestrul 1\\Parallel and Distributed Programming\\Labs\\Project_15PuzzleProblem\\MPI\\src\\input.in")));
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
